@@ -1,0 +1,22 @@
+.map-wrapper {
+  height: 50vh;
+  padding: 20px;
+  display: flex;
+}
+.map-wrapper-less-width {
+  display: flex;
+  justify-content: space-between;
+}
+.sidebar-container {
+  display: block;
+  position: relative;
+  transition: width 0.5s ease;
+  overflow: hidden;
+  border: 1px solid #ccd3db;
+  width: 0;
+
+  &.opened {
+    width: 400px;
+  }
+}
+

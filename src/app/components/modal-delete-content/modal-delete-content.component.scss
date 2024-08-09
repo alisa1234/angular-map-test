@@ -1,0 +1,45 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .title {
+    padding: 10px;
+    font-size: 20px;
+    color: red;
+  }
+
+  .content {
+    padding: 10px;
+    font-size: 18px;
+  }
+
+  .action-btn {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+
+    button {
+      width: 6vw;
+      height: 6vh;
+      margin: 10px 0;
+      border-radius: 5px;
+      background-color: transparent;
+      font-size: 16px;
+      cursor: pointer;
+      min-width: 70px;
+
+      &:hover {
+        background-color: lightsalmon;
+      }
+    }
+    .btn-success {
+      border: 1px solid green;
+      color: green;
+    }
+    .btn-error {
+      border: 1px solid red;
+      color: red;
+    }
+  }
+}

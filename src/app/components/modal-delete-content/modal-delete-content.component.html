@@ -1,0 +1,8 @@
+<div class="wrapper">
+  <div class="title">{{'titleConfirmation' | localization}}</div>
+  <div class="content">{{'messageConfirmation' | localization}} {{this.options?.data?.name || 'item'}}?</div>
+  <div class="action-btn">
+    <button class="btn-success" (click)="onSuccess()">{{'successBtn' | localization}}</button>
+    <button class="btn-error" (click)="onClose()">{{'btnCancel' | localization}}</button>
+  </div>
+</div>

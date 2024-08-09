@@ -1,0 +1,30 @@
+<div class="pagination">
+  <ng-container *ngIf="pages.length <= 6">
+    <div *ngFor="let page of pages" class="page" [class.active]="selectedPage === page" (click)="getSelectedPage(page)">
+      {{page}}
+    </div>
+  </ng-container>
+  <ng-container *ngIf="pages.length > 6">
+    <ng-container *ngFor="let page of pages">
+      <div *ngIf="isShowFirstPage(page)" class="page" (click)="getSelectedPage(1)">
+        1
+      </div>
+      <div *ngIf="isShowPrevDots(page)" class="page">
+        ...
+      </div>
+      <div
+        *ngIf="isShowMainPages(page)"
+        class="page"
+        [class.active]="selectedPage === page"
+        (click)="getSelectedPage(page)">
+        {{page}}
+      </div>
+      <div *ngIf="isShowNextDots(page)" class="page">
+        ...
+      </div>
+      <div *ngIf="isShowLastPage(page)" class="page" [class.active]="selectedPage === page" (click)="getSelectedPage(page)">
+        {{page}}
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

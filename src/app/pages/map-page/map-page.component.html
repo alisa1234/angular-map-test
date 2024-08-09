@@ -1,0 +1,6 @@
+<div class="map-wrapper" [class.map-wrapper-less-width]="showInfo">
+  <app-map (selectedLocation)="getSelectedLocation($event)"></app-map>
+  <div class="sidebar-container" [class.opened]="selectedLocation">
+    <app-location-info *ngIf="selectedLocation" [location]="selectedLocation" (onClose)="onClose()"></app-location-info>
+  </div>
+</div>

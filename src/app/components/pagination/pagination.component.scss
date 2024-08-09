@@ -1,0 +1,14 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fb761e;
+  cursor: pointer;
+
+  .page {
+    padding: 10px;
+  }
+  .active {
+    color: #37b7e5;
+  }
+}

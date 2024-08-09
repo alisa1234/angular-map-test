@@ -1,0 +1,83 @@
+<div class="main-wrapper">
+  <div class="table-wrapper">
+    <div class="table-row">
+      <div class="table-col">
+        {{'name' | localization}}
+        <fa-icon class="icon-sort"
+                 [icon]="order === 'ASC' ? faSortUp : faSortDown"
+                 (click)="sort(order === 'ASC' ? 'DSC' : 'ASC')"></fa-icon>
+      </div>
+      <div class="table-col">{{'lat' | localization}}</div>
+      <div class="table-col">{{'lng' | localization}}</div>
+      <div class="table-col last-column"></div>
+    </div>
+    <div class="table-row" *ngFor="let location of ((locations | async) | slice: (selectedPage - 1) * itemsOnPage.value: selectedPage * itemsOnPage.value); let i = index">
+      <div class="table-col warning-msg">
+        <input
+          type="text"
+          #name="ngModel"
+          required
+          [class.input-edit]="editableArr[i]"
+          [(ngModel)]="location.name"
+          [disabled]="!editableArr[i]"
+        />
+        <ng-container *ngIf="name.invalid && (name.dirty || name.touched)">
+          <span *ngIf="name?.errors?.['required']" class="error-text">{{'errorMessageNameRequired' | localization}}</span>
+        </ng-container>
+      </div>
+      <div class="table-col warning-msg">
+        <input
+          type="number"
+          [name]="'lat'"
+          #lat="ngModel"
+          min="-180"
+          max="180'"
+          required
+          [class.input-edit]="editableArr[i]"
+          [(ngModel)]="location.position.lat"
+          [disabled]="!editableArr[i]"
+        />
+        <ng-container *ngIf="lat.invalid && (lat.dirty || lat.touched)">
+          <span *ngIf="lat?.errors?.['min'] || lat?.errors?.['max'] || lat?.errors?.['required']"
+                class="error-text">{{'errorMessageLat' | localization}}</span>
+        </ng-container>
+      </div>
+      <div class="table-col warning-msg">
+        <input
+          type="number"
+          [name]="'lng'"
+          #lng="ngModel"
+          min="-90"
+          max="90"
+          required
+          [class.input-edit]="editableArr[i]"
+          [(ngModel)]="location.position.lng"
+          [disabled]="!editableArr[i]"
+        />
+        <ng-container *ngIf="lng.invalid && (lng.dirty || lng.touched)">
+          <span *ngIf="lng?.errors?.['min'] || lng?.errors?.['max'] || lng?.errors?.['required']"
+                class="error-text">{{'errorMessageLng' | localization}}</span>
+        </ng-container>
+      </div>
+      <div class="table-col last-column">
+        <fa-icon *ngIf="!editableArr[i]" class="icon-edit" [icon]="faPencil" (click)="edit(i)"></fa-icon>
+        <fa-icon *ngIf="editableArr[i]" class="icon-edit" [icon]="faCheck" (click)="save(i)"></fa-icon>
+        <fa-icon class="icon-edit" [icon]="faTrash" (click)="openModalDelete({name: location.name, index: i})"></fa-icon>
+      </div>
+    </div>
+    <div class="action-buttons">
+      <button
+        class="btn-add"
+        (click)="openModalAdd()"
+      >{{'addBtn' | localization}}</button>
+      <div class="btn-items">
+        <select [formControl]="itemsOnPage">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        </select>
+      </div>
+    </div>
+    <app-pagination [pages]="pages" (selectedPage$)="getPageResult($event)"></app-pagination>
+  </div>
+</div>

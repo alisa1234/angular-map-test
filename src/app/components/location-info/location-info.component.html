@@ -1,0 +1,7 @@
+<div class="location-info">
+  <h2>{{location?.name}}</h2>
+  <div>{{'lat' | localization}}: {{location?.position?.lat}}</div>
+  <div>{{'lng' | localization}}: {{location?.position?.lng}}</div>
+</div>
+<fa-icon class="location-info-close" [icon]="faXmark" (click)="closeInfo()"></fa-icon>
+

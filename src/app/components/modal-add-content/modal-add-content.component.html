@@ -1,0 +1,33 @@
+<div class="wrapper">
+  <div class="title">{{'titleAdd' | localization}} {{form.get('name')?.value}}</div>
+  <form [formGroup]="form">
+    <div class="input-wrapper">
+      <label for="name">{{'name' | localization}}</label>
+      <input type="text" id="name" formControlName="name">
+      <ng-container *ngIf="form.get('name')?.invalid && (form.get('name')?.dirty || form.get('name')?.touched)">
+            <span *ngIf="form.get('name')?.errors?.['required']"
+                  class="error-text">{{'errorMessageNameRequired' | localization}}</span>
+      </ng-container>
+    </div>
+    <div class="input-wrapper">
+      <label for="lat">{{'lat' | localization}}</label>
+      <input type="number" id="lat" formControlName="lat">
+      <ng-container *ngIf="form.get('lat')?.invalid && (form.get('lat')?.dirty || form.get('lat')?.touched)">
+            <span *ngIf="form.get('lat')?.errors?.['min'] || form.get('lat')?.errors?.['max'] || form.get('lat')?.errors?.['required']"
+                  class="error-text">{{'errorMessageLat' | localization}}</span>
+      </ng-container>
+    </div>
+    <div class="input-wrapper">
+      <label for="lng">{{'lng' | localization}}</label>
+      <input type="number" id="lng" formControlName="lng">
+      <ng-container *ngIf="form.get('lng')?.invalid && (form.get('lng')?.dirty || form.get('lng')?.touched)">
+            <span *ngIf="form.get('lng')?.errors?.['lng'] || form.get('lng')?.errors?.['max'] || form.get('lng')?.errors?.['required']"
+                  class="error-text">{{'errorMessageLng' | localization}}</span>
+      </ng-container>
+    </div>
+  </form>
+  <div class="action-btn">
+    <button class="btn-success" [disabled]="form.invalid" (click)="onSuccess()">{{'successBtnAdd' | localization}}</button>
+    <button class="btn-error" (click)="onClose()">{{'btnCancel' | localization}}</button>
+  </div>
+</div>

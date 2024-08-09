@@ -1,0 +1,9 @@
+<div [style]="{height: '50vh', width: '100%'}">
+  <google-map height="50vh" width="100%" [options]="options">
+    <map-marker-clusterer [imagePath]="markerClustererImagePath">
+      <map-marker *ngFor="let marker of (markers | async)"
+                  [position]="marker.position"
+                  (mapClick)="getMarkerInfo(marker)"></map-marker>
+    </map-marker-clusterer>
+  </google-map>
+</div>
