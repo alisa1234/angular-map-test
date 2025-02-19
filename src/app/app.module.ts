@@ -14,6 +14,7 @@ import { LocationInfoComponent } from './components/location-info/location-info.
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {PipesModule} from "./pipes/pipes.module";
 import {PaginationComponent} from "./components/pagination/pagination.component";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {PaginationComponent} from "./components/pagination/pagination.component"
     FontAwesomeModule,
     FormsModule,
     PipesModule,
-    PaginationComponent
+    PaginationComponent,
+    HttpClientModule,
   ],
   providers: [],
   exports: [

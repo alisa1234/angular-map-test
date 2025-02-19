@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {Location, LocationDTO} from "../types/locationDTO";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +9,10 @@ import {Location, LocationDTO} from "../types/locationDTO";
 export class LocationsService {
   locations: BehaviorSubject<Location[] | undefined> = new BehaviorSubject<Location[] | undefined>(undefined);
 
-  constructor() {
+  constructor(private http:HttpClient) {
     const locations: string | null = localStorage.getItem('locations')
     if (!locations) {
+      // this.getLocations();
       this.getLocationsLocal().then();
     } else {
       this.locations.next(JSON.parse(locations));
@@ -67,5 +69,21 @@ export class LocationsService {
     locations.push(data);
     this.locations.next(locations);
     this.setLocationsToStorage(locations);
+  }
+  getLocations() {
+    this.http.get<LocationDTO[]>('http://localhost:3000')
+            .subscribe(response => {
+              const locations: Location[] = response.map((item: LocationDTO) => {
+                return {
+                  position: {
+                    lat: item.coordinates[0],
+                    lng: item.coordinates[1]
+                  },
+                  name: item.name
+                }
+              });
+              this.setLocationsToStorage(locations);
+              this.locations.next(locations);
+            })
   }
 }
